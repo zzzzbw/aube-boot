@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user
+(
+    id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+	name VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
+	birthday datetime NULL DEFAULT NULL COMMENT '生日',
+	user_type VARCHAR(50) NULL DEFAULT NULL COMMENT '用户类型',
+	deleted tinyint(2) NOT NULL DEFAULT 0 COMMENT '逻辑删除 0:未删除 1: 已删除',
+    create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+	PRIMARY KEY (id)
+);

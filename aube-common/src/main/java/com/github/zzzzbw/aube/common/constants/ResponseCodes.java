@@ -12,9 +12,15 @@ import lombok.Getter;
 @Getter
 public enum ResponseCodes {
     SUCCESS(0, "成功"),
+
+    BAD_REQUEST(400, ""),
+
     AUTH_ERROR(401, "验证失败"),
+
     FORBIDDEN(403, "拒绝访问"),
+
     NOT_FOUND(404, "找不到资源"),
+
     INTERNAL_SERVER_ERROR(500, "系统繁忙，请稍后再试"),
     ;
 

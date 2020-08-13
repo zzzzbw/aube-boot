@@ -51,10 +51,11 @@ public class Response<T> {
         this.msg = msg;
     }
 
-    public <X extends Throwable> T orElseThrow() throws X {
-        return orElseThrow(() -> {
+    public T orElseThrow() {
+        if (!this.success) {
             throw new BaseException(this);
-        });
+        }
+        return this.data;
     }
 
     public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {

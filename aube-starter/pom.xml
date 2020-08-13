@@ -13,7 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>aube-swagger-starter</module>
+        <module>aube-mybatis-plus-starter</module>
+        <module>aube-web-starter</module>
     </modules>
-
 
 </project>

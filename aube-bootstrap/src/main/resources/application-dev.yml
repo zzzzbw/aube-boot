@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    url: jdbc:h2:mem:test
+    username: root
+    password: test
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      path: /h2-console
+      enabled: true
+
+
+# 开发环境sql日志
+logging:
+  level:
+    com:
+      github:
+        zzzzbw:
+          aube:
+            dao: debug
+aube:
+  swagger:
+    enabled: true

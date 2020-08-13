@@ -8,14 +8,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2020/3/21 2:29
  */
 @Data
-@ConfigurationProperties(prefix = "swagger")
+@ConfigurationProperties(prefix = "aube.swagger")
 public class SwaggerProperties {
 
     private boolean enabled = true;
 
     private String basePackage = "";
 
-    private String title = "swagger document";
+    private String title = "Swagger document";
 
     private String description = "Auto create by SwaggerAutoConfiguration";
 

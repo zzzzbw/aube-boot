@@ -8,13 +8,42 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <description>Aube Boot Bootstrap Service</description>
 
     <artifactId>aube-bootstrap</artifactId>
 
     <dependencies>
+
+        <!-- 自定义web相关组件 -->
+        <dependency>
+            <groupId>com.github.zzzzbw</groupId>
+            <artifactId>aube-web-starter</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 自定义swagger相关组件 -->
+        <dependency>
+            <groupId>com.github.zzzzbw</groupId>
+            <artifactId>aube-swagger-starter</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 自定义mybatis-plus相关组件 -->
+        <dependency>
+            <groupId>com.github.zzzzbw</groupId>
+            <artifactId>aube-mybatis-plus-starter</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

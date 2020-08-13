@@ -1,1 +1,11 @@
+spring:
+  profiles:
+    # 默认为开发环境
+    active: dev
 
+aube:
+  swagger:
+    base-package: com.github.zzzzbw.aube.controller
+    title: @artifactId@
+    description: @description@
+    version: @version@
