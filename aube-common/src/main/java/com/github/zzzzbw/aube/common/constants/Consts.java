@@ -10,12 +10,14 @@ import lombok.experimental.UtilityClass;
 public class Consts {
 
     public interface PACKAGE {
-        String MAPPER_SCAN = "com.github.zzzzbw.aube.**.dao";
+        String BASE = "com.github.zzzzbw.aube";
 
-        String SWAGGER_STARTER = "com.github.zzzzbw.aube.swagger.starter";
+        String MAPPER_SCAN = BASE + ".**.dao";
 
-        String MYBATIS_PLUS_STARTER = "com.github.zzzzbw.aube.mybatisplus.starter";
+        String SWAGGER_STARTER = BASE + ".swagger.starter";
 
-        String WEB_STARTER = "com.github.zzzzbw.aube.web.starter";
+        String MYBATIS_PLUS_STARTER = BASE + ".mybatisplus.starter";
+
+        String WEB_STARTER = BASE + ".web.starter";
     }
 }

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @author by zzzzbw
  * @since 2020/08/06 17:16
  */
-public abstract class PageReq extends BaseReq {
+public abstract class BasePageReq extends BaseReq {
     @ApiModelProperty(value = "页数 从1开始", example = "1")
     protected int current = 1;
     @ApiModelProperty(value = "每页显示数量", example = "10")

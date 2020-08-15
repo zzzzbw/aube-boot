@@ -1,7 +1,9 @@
 package com.github.zzzzbw.aube.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.zzzzbw.aube.model.dto.UserDTO;
 import com.github.zzzzbw.aube.model.dto.req.UserCreateReq;
+import com.github.zzzzbw.aube.model.dto.req.UserPageReq;
 import com.github.zzzzbw.aube.model.dto.req.UserUpdateReq;
 import com.github.zzzzbw.aube.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ public class UserController {
     @GetMapping("{id}")
     public UserDTO get(@PathVariable long id) {
         return userService.getDto(id);
+    }
+
+    @GetMapping
+    public IPage<UserDTO> page(UserPageReq req) {
+        return userService.pageDto(req);
     }
 
     @PostMapping

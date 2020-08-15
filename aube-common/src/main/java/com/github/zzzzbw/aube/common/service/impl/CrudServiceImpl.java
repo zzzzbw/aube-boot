@@ -8,5 +8,5 @@ import com.github.zzzzbw.aube.common.service.ICrudService;
  * @author by zzzzbw
  * @since 2020/08/06 17:52
  */
-public class CrudService<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements ICrudService<T> {
+public class CrudServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements ICrudService<T> {
 }

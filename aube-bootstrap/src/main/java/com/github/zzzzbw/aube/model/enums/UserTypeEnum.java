@@ -11,9 +11,13 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum UserTypeEnum implements SwaggerEnum {
-
+    /**
+     * 普通用户
+     */
     NORMAL("普通用户"),
-
+    /**
+     * 管理员用户
+     */
     ADMIN("管理员用户");
 
     private final String desc;

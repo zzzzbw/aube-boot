@@ -1,5 +1,6 @@
 package com.github.zzzzbw.aube.web.starter.handler;
 
+import com.github.zzzzbw.aube.common.constants.Consts;
 import com.github.zzzzbw.aube.common.constants.Response;
 import com.github.zzzzbw.aube.common.util.JsonUtils;
 import org.springframework.core.MethodParameter;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @author by zzzzbw
  * @since 2020/08/13 15:20
  */
-@RestControllerAdvice
+@RestControllerAdvice(Consts.PACKAGE.BASE)
 public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
     @Override

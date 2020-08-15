@@ -35,7 +35,8 @@ public class SwaggerAutoConfiguration {
                 .enable(swaggerProperties.isEnabled())
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage())) // 根据配置扫描包
+                // 根据配置扫描包
+                .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
                 .paths(PathSelectors.any())
                 .build();
     }

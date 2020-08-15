@@ -1,13 +1,13 @@
 package com.github.zzzzbw.aube.web.starter.handler;
 
 
+import com.github.zzzzbw.aube.common.constants.Consts;
 import com.github.zzzzbw.aube.common.constants.Response;
 import com.github.zzzzbw.aube.common.constants.ResponseCodes;
 import com.github.zzzzbw.aube.common.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -50,8 +50,8 @@ import java.util.stream.Collectors;
  * @since 2020/4/1 22:50
  */
 @Slf4j
-@RestControllerAdvice
-public class GlobalExceptionHandler implements ErrorController {
+@RestControllerAdvice(Consts.PACKAGE.BASE)
+public class GlobalExceptionHandler {
 
     /**
      * 参数绑定对象时候抛出的异常
@@ -191,10 +191,5 @@ public class GlobalExceptionHandler implements ErrorController {
     public Response<Response.EmptyData> server500(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
         log.error("---server500 Handler---Host {}, invokes url {},  ERROR: {}", req.getRemoteHost(), req.getRequestURL(), ex.getMessage(), ex);
         return Response.fail(ResponseCodes.INTERNAL_SERVER_ERROR);
-    }
-
-    @Override
-    public String getErrorPath() {
-        return null;
     }
 }
