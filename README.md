@@ -54,7 +54,7 @@
 > 其次, 如果把基础公共代码和需求代码写在一个工程下, 一旦公司需要新建一个项目, 那么还要把这个部分项目复制粘贴到新的项目. 一旦需要修改, 就要改动所有项目的公共代码. 
 > 现在分离成工程, 可以用`maven`的`deploy`方法将公共工程推到远程(或内网)仓库, 每个项目再通过`maven`引入这些依赖即可.
 
-#### 项目引入（已经引入的一些功能，及封装）
+#### 服务引入（已经引入的一些功能，及封装）
 
 > maven引入，如果引入第三方, 比如统一在父工程声明版本, 再在子工程使用, 如无特殊原因子工程不允许自行声明版本, 避免各个工程引用同一个库的不同版本. 如:
 >
@@ -92,11 +92,65 @@
 
 > [MyBatis-Plus](https://github.com/baomidou/mybatis-plus) （简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
 
+在工程`aube-starter#aube-mybatis-plus-starter`中引入了`MyBatis-Plus`, 目前已经配置了分页插件。
+如果需要其他配置可以参考其[官方文档](https://baomidou.com/), 然后在工程中增加对应的配置。
+
+我们的项目只需要在`maven`中添加:
+```xml
+<dependency>
+    <groupId>com.github.zzzzbw</groupId>
+    <artifactId>aube-mybatis-plus-starter</artifactId>
+    <version>${version}</version>
+</dependency>
+```
+就能引入统一的`MyBatis-Plus`插件及其配置。
+
+##### Swagger3引入
+
+Swagger在时隔几年之后终于从2升级到3了, 这里我们也直接引入了最新的Swagger.
+ 
+相比于Swagger2, 最直观的感受就是文档标准切换到了`Open API`, 并且跟进了Spring Boot的自动装配特性, 有了对应的starter.
+
+1. Aube中进一步封装了Swagger的配置, 可以统一通过配置文件修改Swagger文档基本信息, 如: 
+
+```yaml
+# application.yml
+aube:
+  swagger:
+    enabled: true # 是否开启swagger
+    base-package: com.github.zzzzbw.aube.controller # api扫描的包
+    title: @artifactId@ # swagger的标题
+    description: @description@ # swagger的描述
+    version: @version@ # swagger的版本
+```
+
+2. 增强了枚举类文档信息
+
+提供了`SwaggerEnum`接口, 只要枚举实现接口的`getDesc()`方法(通常是在枚举中声明String类型的desc字段, 然后生成`getter`方法), 如:
+
+```java
+@AllArgsConstructor
+@Getter
+public enum UserTypeEnum implements SwaggerEnum {
+    NORMAL("普通用户"),
+    ADMIN("管理员用户");
+
+    private final String desc;
+}
+```
+
+Swagger文档中就会自动生成枚举类对应的值和备注: 
+`用户类型 NORMAL: 普通用户; ADMIN: 管理员用户;`
+
+##### web服务封装
 
 
 
 
-2. Swagger3引入
+
+
+
+
 
 3. 自定义全局异常拦截, 自定义全局返回拦截, 日志拦截器, AOP日志与Interceptor日志
 
