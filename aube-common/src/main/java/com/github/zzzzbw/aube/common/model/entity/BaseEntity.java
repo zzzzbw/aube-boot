@@ -13,10 +13,10 @@ import java.util.Date;
  * @since 2020/08/06 17:25
  */
 @Data
-public class BaseEntity {
+public class BaseEntity<T> {
 
     @TableId(type = IdType.AUTO)
-    protected long id;
+    protected T id;
 
     protected Date createTime = new Date();
 

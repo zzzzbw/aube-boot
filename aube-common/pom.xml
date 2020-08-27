@@ -12,6 +12,11 @@
     <artifactId>aube-common</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- 只引用swagger的类, 不引用starter -->
         <dependency>
             <groupId>io.springfox</groupId>

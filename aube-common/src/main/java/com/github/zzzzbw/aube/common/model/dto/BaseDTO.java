@@ -2,10 +2,9 @@ package com.github.zzzzbw.aube.common.model.dto;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Objects;
 
 /**
@@ -97,15 +96,6 @@ public interface BaseDTO<DTO extends BaseDTO<DTO, ENTITY>, ENTITY> {
      */
     @SuppressWarnings("unchecked")
     default Class<ENTITY> entityClass() {
-        Type[] types = this.getClass().getGenericInterfaces();
-        Class<ENTITY> entityClz = null;
-        for (Type type : types) {
-            if (type instanceof ParameterizedType) {
-                ParameterizedType pType = (ParameterizedType) type;
-                entityClz = (Class<ENTITY>) pType.getActualTypeArguments()[1];
-            }
-        }
-        Objects.requireNonNull(entityClz, "cannot find entityClz!");
-        return entityClz;
+        return (Class<ENTITY>) ClassUtil.getTypeArgument(this.getClass(), 1);
     }
 }

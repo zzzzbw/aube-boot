@@ -1,12 +1,12 @@
 package com.github.zzzzbw.aube.model.dto.req;
 
-import com.github.zzzzbw.aube.common.model.req.BasePageReq;
+import com.github.zzzzbw.aube.common.model.req.PageReq;
 import com.github.zzzzbw.aube.model.enums.UserTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 /**
- * @author by ZHANGBOWEN469
+ * @author by zzzzbw
  * @since 2020/08/14 14:18
  */
 @EqualsAndHashCode(callSuper = true)
@@ -14,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Data
-public class UserPageReq extends BasePageReq {
+public class UserPageReq extends PageReq {
     @ApiModelProperty("姓名")
     private String name;
 
