@@ -1,7 +1,6 @@
 package com.github.zzzzbw.aube.model.dto.req;
 
 import com.github.zzzzbw.aube.common.model.dto.BaseDTO;
-import com.github.zzzzbw.aube.common.model.req.PageReq;
 import com.github.zzzzbw.aube.model.entity.Product;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,7 +10,8 @@ import lombok.Data;
  * @since 2020/08/27 16:43
  */
 @Data
-public class ProductQueryReq extends PageReq<Product, ProductQueryReq> implements BaseDTO<ProductQueryReq, Product> {
+public class ProductQueryReq implements BaseDTO<ProductQueryReq, Product> {
+
     @ApiModelProperty("订单id")
     private Long id;
 

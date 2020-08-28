@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Date;
 @Data
 public class ProductUpdateReq implements BaseDTO<ProductUpdateReq, Product> {
 
-
+    @NotNull
     @ApiModelProperty("主键id")
     private Long id;
 

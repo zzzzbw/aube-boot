@@ -105,7 +105,7 @@
 
 > [MyBatis-Plus](https://github.com/baomidou/mybatis-plus) （简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
 
-在工程`aube-starter#aube-mybatis-plus-starter`中引入了`MyBatis-Plus`, 目前已经配置了分页插件。
+在工程`aube-starter#aube-mybatis-plus-starter`中引入了`MyBatis-Plus`, 目前已经配置了分页插件、Entity字段自动填充功能。
 如果需要其他配置可以参考其[官方文档](https://baomidou.com/), 然后在工程中增加对应的配置。
 
 我们的项目只需要在`maven`中添加:

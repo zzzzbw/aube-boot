@@ -6,15 +6,18 @@ import com.github.zzzzbw.aube.common.constants.Response;
 import com.github.zzzzbw.aube.common.constants.ResponseCodes;
 import com.github.zzzzbw.aube.common.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.validation.BindException;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,10 +25,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /*
@@ -54,29 +55,60 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     /**
-     * 参数绑定对象时候抛出的异常
-     */
-    @ExceptionHandler(value = BindException.class)
-    public Response<Response.EmptyData> handleBindException(BindException ex) {
-        log.error(ex.getMessage());
-        List<String> defaultMsg = ex.getBindingResult().getAllErrors()
-                .stream()
-                .map(ObjectError::getDefaultMessage)
-                .collect(Collectors.toList());
-        return Response.fail(ResponseCodes.BAD_REQUEST.getCode(), defaultMsg.get(0));
-    }
-
-    /**
-     * 单个参数校验
+     * 单个参数校验异常
      */
     @ExceptionHandler(value = ConstraintViolationException.class)
     public Response<Response.EmptyData> handleBindGetException(ConstraintViolationException ex) {
         log.error(ex.getMessage());
-        List<String> defaultMsg = ex.getConstraintViolations()
+        String msg = ex.getConstraintViolations()
                 .stream()
-                .map(ConstraintViolation::getMessage)
-                .collect(Collectors.toList());
-        return Response.fail(ResponseCodes.BAD_REQUEST.getCode(), defaultMsg.get(0));
+                .map(error -> String.join("",
+                        "[", ((PathImpl) error.getPropertyPath()).getLeafNode().getName(),
+                        "]: ",
+                        error.getMessage()))
+                .collect(Collectors.joining(";"));
+        return Response.fail(ResponseCodes.BAD_REQUEST.getCode(), msg);
+    }
+
+    /**
+     * 参数绑定对象异常
+     */
+    @ExceptionHandler(value = BindException.class)
+    public Response<Response.EmptyData> handleBindException(BindException ex) {
+        log.error(ex.getMessage());
+        String msg = bindingResultErrorMsg(ex.getBindingResult());
+        return Response.fail(ResponseCodes.BAD_REQUEST.getCode(), msg);
+    }
+
+
+    /**
+     * {@code @RequestBody} 对象绑定返回异常
+     */
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public Response<Response.EmptyData> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        log.error(ex.getMessage());
+        String msg = bindingResultErrorMsg(ex.getBindingResult());
+        return Response.fail(ResponseCodes.BAD_REQUEST.getCode(), msg);
+    }
+
+    /**
+     * 转换BindingResult数据为错误信息
+     */
+    private String bindingResultErrorMsg(BindingResult bindingResult) {
+        return bindingResult.getAllErrors()
+                .stream()
+                .map(error -> {
+                    if (error instanceof FieldError) {
+                        FieldError fieldError = (FieldError) error;
+                        return String.join("",
+                                "[",
+                                fieldError.getField(),
+                                "]: ",
+                                fieldError.getDefaultMessage());
+                    } else {
+                        return error.getDefaultMessage();
+                    }
+                }).collect(Collectors.joining(";"));
     }
 
 

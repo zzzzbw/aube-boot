@@ -18,7 +18,7 @@ public class Product extends BaseEntity<Long> {
 
     private String name;
 
-    private long amount;
+    private Long amount;
 
     private Date orderDate;
 }

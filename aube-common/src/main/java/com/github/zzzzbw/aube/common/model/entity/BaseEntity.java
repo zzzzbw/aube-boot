@@ -1,12 +1,9 @@
 package com.github.zzzzbw.aube.common.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author by zzzzbw
@@ -18,10 +15,11 @@ public class BaseEntity<T> {
     @TableId(type = IdType.AUTO)
     protected T id;
 
-    protected Date createTime = new Date();
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    protected LocalDateTime createTime;
 
-    @TableField(value = "update_time", update = "now()")
-    protected Date updateTime = new Date();
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    protected LocalDateTime updateTime;
 
     /**
      * 逻辑删除 0:未删除 1: 已删除

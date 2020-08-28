@@ -34,9 +34,7 @@ public interface BaseDTO<DTO extends BaseDTO<DTO, ENTITY>, ENTITY> {
 
     default ENTITY convertTo() {
         Class<ENTITY> entityClass = entityClass();
-        ENTITY entity = ReflectUtil.newInstance(entityClass);
-        BeanUtil.copyProperties(this, entity);
-        return entity;
+        return BeanUtil.toBean(this,entityClass);
     }
 
     /**

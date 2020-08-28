@@ -3,7 +3,6 @@ package com.github.zzzzbw.aube.common.model.req;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.zzzzbw.aube.common.model.dto.BaseDTO;
 import com.github.zzzzbw.aube.common.util.SqlFilterUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PageReq<ENTITY, QueryDTO extends BaseDTO<QueryDTO, ENTITY>> extends BaseReq {
+public class PageReq<QueryDTO> extends BaseReq {
     @ApiModelProperty(value = "查询条件")
     private QueryDTO query;
     @ApiModelProperty(value = "页数 从1开始", example = "1")

@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -19,12 +22,16 @@ import java.util.Date;
 @Builder
 @Data
 public class ProductCreateReq implements BaseDTO<ProductCreateReq, Product> {
+
+    @NotNull
     @ApiModelProperty("用户id")
     private Long userId;
 
+    @NotBlank
     @ApiModelProperty("商品名")
     private String name;
 
+    @Min(0)
     @ApiModelProperty("金额")
     private long amount;
 
