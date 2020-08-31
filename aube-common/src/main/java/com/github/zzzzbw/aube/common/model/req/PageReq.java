@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class PageReq<QueryDTO> extends BaseReq {
+    public static final String QUERY_FIELD_NAME = "query";
+
     @ApiModelProperty(value = "查询条件")
     private QueryDTO query;
     @ApiModelProperty(value = "页数 从1开始", example = "1")

@@ -22,15 +22,20 @@ public class LogFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String remoteAddr = ServletUtil.getClientIP(request);
 
-        log.info("Starting url: [{}], method: [{}], ip: [{}]", request.getRequestURL(), request.getMethod(), remoteAddr);
+
+        if (log.isDebugEnabled()) {
+            log.info("Starting url: [{}], method: [{}], ip: [{}]", request.getRequestURL(), request.getMethod(), remoteAddr);
+        }
 
         // Set start time
         long startTime = System.currentTimeMillis();
-
         // Do filter
         filterChain.doFilter(request, response);
 
-        log.info("Ending url: [{}], method: [{}], ip: [{}], status: [{}], usage: [{}] ms",
-                request.getRequestURL(), request.getMethod(), remoteAddr, response.getStatus(), System.currentTimeMillis() - startTime);
+        if (log.isDebugEnabled()) {
+            log.info("Ending url: [{}], method: [{}], ip: [{}], status: [{}], usage: [{}] ms",
+                    request.getRequestURL(), request.getMethod(), remoteAddr, response.getStatus(), System.currentTimeMillis() - startTime);
+        }
+
     }
 }
