@@ -4,7 +4,6 @@ import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.zzzzbw.aube.common.model.req.PageReq;
-import com.github.zzzzbw.aube.web.starter.annotation.GenericParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.MutablePropertyValues;
@@ -26,7 +25,6 @@ import java.lang.reflect.Type;
  */
 @Slf4j
 public class PageReqArgumentResolver implements HandlerMethodArgumentResolver {
-
     /**
      * 分页查询条件参数的名称
      */
@@ -35,9 +33,7 @@ public class PageReqArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        GenericParam genericParam = parameter.getParameterAnnotation(GenericParam.class);
-        return null != genericParam
-                && StrUtil.isNotBlank(genericParam.value());
+        return false;
     }
 
     @Override

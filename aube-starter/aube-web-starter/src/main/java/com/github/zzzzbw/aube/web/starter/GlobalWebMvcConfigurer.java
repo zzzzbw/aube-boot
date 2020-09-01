@@ -1,6 +1,6 @@
 package com.github.zzzzbw.aube.web.starter;
 
-import com.github.zzzzbw.aube.web.starter.support.PageReqArgumentResolver;
+import com.github.zzzzbw.aube.web.starter.support.GenericArgumentResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,6 +16,6 @@ public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(new PageReqArgumentResolver());
+        argumentResolvers.add(new GenericArgumentResolver(true));
     }
 }
